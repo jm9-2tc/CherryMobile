@@ -10,6 +10,9 @@ public class Account {
     private String password;
     private String pesel;
     private Date dateOfBirth;
+    private String contactNumber;
+    private String email;
+    private String address;
 
     public Account(int id){
         this.id = id;
@@ -57,5 +60,29 @@ public class Account {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

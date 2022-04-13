@@ -7,6 +7,8 @@ import java.util.List;
 
 public class CompanyAccount extends Account {
     private List<Contract> contracts;
+    private String name;
+    private String nip;
 
     public CompanyAccount(int id){
         super(id);
@@ -18,5 +20,21 @@ public class CompanyAccount extends Account {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 }

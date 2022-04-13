@@ -3,7 +3,7 @@ package com.company.classes.companies;
 public class Company {
     private String name;
     private String address;
-    private String phoneNumber;
+    private String contactNumber;
     private String nip;
 
     public Company() {}
@@ -24,12 +24,12 @@ public class Company {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getNip() {
