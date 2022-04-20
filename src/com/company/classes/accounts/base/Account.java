@@ -8,8 +8,6 @@ public class Account {
     private String name;
     private String surname;
     private String password;
-    private String pesel;
-    private Date dateOfBirth;
     private String contactNumber;
     private String email;
     private String address;
@@ -44,22 +42,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getContactNumber() {
