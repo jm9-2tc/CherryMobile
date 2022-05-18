@@ -1,7 +1,7 @@
 package com.company.classes.accounts;
 
 import com.company.classes.accounts.base.Account;
-import com.company.classes.contracts.base.Contract;
+import com.company.classes.contracts.Contract;
 
 import java.util.List;
 
