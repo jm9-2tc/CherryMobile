@@ -1,16 +1,15 @@
-package com.company.classes.accounts;
+package com.company.model.customer;
 
-import com.company.classes.accounts.base.Account;
-import com.company.classes.contracts.Contract;
+import com.company.model.contract.Contract;
 
 import java.util.Date;
 
-public class IndividualAccount extends Account {
+public class IndividualCustomer extends Customer {
     private String pesel;
     private Date dateOfBirth;
     private Contract[] contracts = new Contract[10];
 
-    public IndividualAccount(int id) {
+    public IndividualCustomer(int id) {
         super(id);
     }
 

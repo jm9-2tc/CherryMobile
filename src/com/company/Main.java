@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.classes.DatabaseConnector;
+import com.company.data.DatabaseConnector;
 
 public class Main {
 

@@ -1,17 +1,21 @@
-package com.company.classes.accounts;
+package com.company.model.customer;
 
-import com.company.classes.accounts.base.Account;
-import com.company.classes.contracts.Contract;
+import com.company.model.contract.Contract;
 
 import java.util.List;
 
-public class CompanyAccount extends Account {
+public class BusinessCustomer extends Customer {
     private List<Contract> contracts;
     private String name;
     private String nip;
+    private String regon;
 
-    public CompanyAccount(int id){
+    public BusinessCustomer(int id, List<Contract> contracts, String name, String nip, String regon) {
         super(id);
+        this.contracts = contracts;
+        this.name = name;
+        this.nip = nip;
+        this.regon = regon;
     }
 
     public List<Contract> getContracts() {
@@ -36,5 +40,13 @@ public class CompanyAccount extends Account {
 
     public void setNip(String nip) {
         this.nip = nip;
+    }
+
+    public String getRegon() {
+        return regon;
+    }
+
+    public void setRegon(String regon) {
+        this.regon = regon;
     }
 }

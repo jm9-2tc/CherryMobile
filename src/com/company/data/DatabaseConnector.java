@@ -1,4 +1,4 @@
-package com.company.classes;
+package com.company.data;
 
 import java.sql.*;
 
@@ -65,8 +65,12 @@ public class DatabaseConnector {
         try {
             statement.execute(sql);
         } catch (SQLException ignored) {
-            System.out.println("cannot execute SQL: '" + sql + "'.");
-            System.exit(64);
+            stopApplication("cannot execute SQL: '" + sql + "'.");
         }
+    }
+
+    private void stopApplication(String reason) {
+        System.out.println(reason);
+        System.exit(64);
     }
 }

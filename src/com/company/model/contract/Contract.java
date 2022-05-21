@@ -1,4 +1,4 @@
-package com.company.classes.contracts;
+package com.company.model.contract;
 
 import java.time.LocalDate;
 
