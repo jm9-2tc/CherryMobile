@@ -2,13 +2,13 @@ package com.company.data;
 
 import java.sql.*;
 
-public class DatabaseConnector {
-    private final String url = "jdbc:sqlite:/C:\\Users\\uczen\\Documents\\CherryMobile\\db.sqlite3";
+public class DatabaseManager {
+    private static final String url = "jdbc:sqlite:/C:\\Users\\uczen\\Documents\\CherryMobile\\db.sqlite3";
 
     private Connection connection;
     private Statement statement;
 
-    public DatabaseConnector() {
+    public DatabaseManager() {
         try {
             this.connection = DriverManager.getConnection(url);
             this.statement = connection.createStatement();

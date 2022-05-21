@@ -1,11 +1,11 @@
 package com.company;
 
-import com.company.data.DatabaseConnector;
+import com.company.data.DatabaseManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        DatabaseConnector db = new DatabaseConnector();
+        DatabaseManager db = new DatabaseManager();
 
         //db.addIndividualClient();
 
