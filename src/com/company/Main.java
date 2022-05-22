@@ -9,8 +9,6 @@ public class Main {
 
         //db.addIndividualClient();
 
-        db.addIndividualClient();
-
         System.out.println(db.getClient());
 
         db.close();
