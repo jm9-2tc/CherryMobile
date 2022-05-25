@@ -1,19 +1,14 @@
 package com.company.model.customer;
 
 public class Customer {
-    public final int id;
-
-    private String contactNumber;
+    private String phoneNumber;
     private String email;
-
     private String password;
 
-    public Customer(int id){
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
+    public Customer(String phoneNumber, String email, String password) {
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
     }
 
     public String getPassword() {
@@ -24,12 +19,12 @@ public class Customer {
         this.password = password;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {

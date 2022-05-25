@@ -9,8 +9,10 @@ public class IndividualCustomer extends Customer {
     private Date dateOfBirth;
     private Contract[] contracts = new Contract[10];
 
-    public IndividualCustomer(int id) {
-        super(id);
+    public IndividualCustomer(String phoneNumber, String email, String password, String pesel, Date dateOfBirth) {
+        super(phoneNumber, email, password);
+        this.pesel = pesel;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPesel() {

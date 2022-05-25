@@ -10,8 +10,8 @@ public class BusinessCustomer extends Customer {
     private String nip;
     private String regon;
 
-    public BusinessCustomer(int id, List<Contract> contracts, String name, String nip, String regon) {
-        super(id);
+    public BusinessCustomer(String phoneNumber, String email, String password, List<Contract> contracts, String name, String nip, String regon) {
+        super(phoneNumber, email, password);
         this.contracts = contracts;
         this.name = name;
         this.nip = nip;

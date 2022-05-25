@@ -3,7 +3,7 @@ package com.company.data;
 import java.sql.*;
 
 public class DatabaseManager {
-    private static final String url = "jdbc:sqlite:/C:\\Users\\janma\\Desktop\\lekcje\\2021_2022\\i20\\2\\workspace\\CherryMobile\\src\\sql\\dbcreator.sql";
+    private static final String url = "jdbc:sqlite:db.sqlite3";
     private static final DatabaseCreator creator = new DatabaseCreator();
 
     private Connection connection;
@@ -11,16 +11,18 @@ public class DatabaseManager {
 
     public DatabaseManager() {
         try {
+            Class.forName("org.sqlite.JDBC");
+
             this.connection = DriverManager.getConnection(url);
             this.statement = connection.createStatement();
 
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet tables = metaData.getTables(null, null, "%", new String[] {"TABLE"});
 
-            if (tables.next()) {
+            if (!tables.next()) {
                 creator.create(statement);
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException | ClassNotFoundException ignored) {
             ignored.printStackTrace();
             stopApplication("cannot connect to the database.");
         }
@@ -48,20 +50,22 @@ public class DatabaseManager {
         return null;
     }
 
-    private ResultSet executeQuery(String sql) {
+    public ResultSet executeQuery(String sql) {
         try {
             statement.executeQuery(sql);
         } catch (SQLException ignored) {
             System.out.println("cannot execute SQL: '" + sql + "'.");
+            ignored.printStackTrace();
             System.exit(64);
         }
         return null;
     }
 
-    private void execute(String sql) {
+    public void execute(String sql) {
         try {
             statement.execute(sql);
         } catch (SQLException ignored) {
+            ignored.printStackTrace();
             stopApplication("cannot execute SQL: '" + sql + "'.");
         }
     }
