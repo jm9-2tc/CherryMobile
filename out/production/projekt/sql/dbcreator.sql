@@ -76,11 +76,13 @@ create unique index address_id_uindex
 -- auto-generated definition
 create table contract
 (
-    id          integer not null
+    id            integer not null
         constraint contract_pk
             primary key autoincrement,
-    customer_id integer
-        references customer
+    customer_id   integer
+        references customer,
+    creation_date date    not null,
+    ending_date   date    not null
 );
 
 create unique index contract_id_uindex

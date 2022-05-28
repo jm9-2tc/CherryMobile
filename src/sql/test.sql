@@ -1,1 +1,1 @@
-SELECT id FROM customer ORDER BY id DESC;
+DELETE FROM customer;

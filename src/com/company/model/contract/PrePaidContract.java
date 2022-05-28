@@ -1,5 +1,9 @@
 package com.company.model.contract;
 
+import com.company.model.contract.base.Contract;
+
+import java.util.Date;
+
 public class PrePaidContract extends Contract {
     private int smsCount;
     private int phoneMinutesCount;
@@ -8,7 +12,8 @@ public class PrePaidContract extends Contract {
     private int contractMoney;
     private PrePaidPrices prices;
 
-    public PrePaidContract(int smsCount, int phoneMinutesCount, int internetMegabytesCount, int contractMoney, PrePaidPrices prices) {
+    public PrePaidContract(Date creationDate, Date endingDate, int smsCount, int phoneMinutesCount, int internetMegabytesCount, int contractMoney, PrePaidPrices prices) {
+        super(creationDate, endingDate);
         this.smsCount = smsCount;
         this.phoneMinutesCount = phoneMinutesCount;
         this.internetMegabytesCount = internetMegabytesCount;

@@ -1,6 +1,6 @@
 package com.company.model.customer;
 
-import com.company.model.contract.Contract;
+import com.company.model.contract.base.Contract;
 import com.company.model.customer.base.Customer;
 
 import java.util.List;

@@ -1,5 +1,9 @@
 package com.company.model.contract;
 
+import com.company.model.contract.base.Contract;
+
+import java.util.Date;
+
 public class PostPaidContract extends Contract {
     private int smsSent;
     private int phoneMinutesUsed;
@@ -7,7 +11,8 @@ public class PostPaidContract extends Contract {
 
     private PostPaidPrices prices;
 
-    public PostPaidContract(int smsSent, int phoneMinutesUsed, int internetMegabytesUsed, PostPaidPrices prices) {
+    public PostPaidContract(Date creationDate, Date endingDate, int smsSent, int phoneMinutesUsed, int internetMegabytesUsed, PostPaidPrices prices) {
+        super(creationDate, endingDate);
         this.smsSent = smsSent;
         this.phoneMinutesUsed = phoneMinutesUsed;
         this.internetMegabytesUsed = internetMegabytesUsed;

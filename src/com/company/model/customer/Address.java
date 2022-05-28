@@ -1,6 +1,7 @@
 package com.company.model.customer;
 
 public class Address {
+    private Integer id = null;
     private String prefix;
     private String streetName;
     private String buildingNumber;
@@ -15,6 +16,14 @@ public class Address {
         this.apartmentNumber = apartmentNumber;
         this.zipCode = zipCode;
         this.cityName = cityName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPrefix() {

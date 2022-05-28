@@ -3,6 +3,7 @@ package com.company;
 import com.company.controllers.CustomerController;
 import com.company.data.DatabaseManager;
 import com.company.model.customer.IndividualCustomer;
+import com.company.model.customer.base.Customer;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +22,9 @@ public class Main {
                 new Date(1994, Calendar.JUNE, 3)
         );
 
-        customerController.saveCustomer(customer1);
+        Customer c2 = customerController.getCustomer(12);
+
+        //customerController.saveCustomer(customer1);
 
         db.close();
     }
