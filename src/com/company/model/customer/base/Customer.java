@@ -1,4 +1,4 @@
-package com.company.model.customer;
+package com.company.model.customer.base;
 
 public class Customer {
     private String phoneNumber;

@@ -1,6 +1,8 @@
 package com.company.controllers;
 
 import com.company.data.DatabaseManager;
+import com.company.model.customer.BusinessCustomer;
+import com.company.model.customer.base.Customer;
 import com.company.model.customer.IndividualCustomer;
 
 import java.sql.ResultSet;
@@ -14,10 +16,24 @@ public class CustomerController {
     }
 
     public void saveCustomer(IndividualCustomer customer) {
+        int customerId = saveBaseCustomer(customer);
+        database.execute("INSERT INTO individual_customer VALUES ('" + customerId + "', '" + customer.getFirstName() + "', '" + customer.getLastName() + "', '" + customer.getPesel() + "')");
+    }
+
+    public void saveCustomer(BusinessCustomer customer) {
+        int customerId = saveBaseCustomer(customer);
+        database.execute("INSERT INTO business_customer VALUES ('" + customerId + "', '" + customer.getNip() + "', '" + customer.getRegon() + "', '" + customer.getName() + "')");
+    }
+
+    private int saveBaseCustomer(Customer customer) {
         database.execute("INSERT INTO customer VALUES (NULL, '" + customer.getEmail() + "', '" + customer.getPhoneNumber() + "', '" + customer.getPassword() + "')");
+        int customerId = -1;
         try {
-            ResultSet lastId = database.executeQuery("SELECT id FROM customer ORDER BY id DESC LIMIT 1;");
-            int a = 5;
-        } catch (Exception ignored) {}
+            ResultSet queryResult = database.executeQuery("SELECT id FROM customer ORDER BY id DESC LIMIT 1;");
+            customerId = queryResult.getInt(0);
+            queryResult.close();
+        } catch (SQLException ignored) {}
+
+        return customerId;
     }
 }

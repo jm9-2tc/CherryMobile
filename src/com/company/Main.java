@@ -6,7 +6,6 @@ import com.company.model.customer.IndividualCustomer;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class Main {
 
@@ -15,11 +14,11 @@ public class Main {
         CustomerController customerController = new CustomerController(db);
 
         IndividualCustomer customer1 = new IndividualCustomer(
-                "+48 123 123 123",
-                "email@gmail.com",
-                "abcd1234",
-                "97495682847",
-                new Date(2000, Calendar.JUNE, 3)
+                "+48 622 765 816",
+                "email@abc.com",
+                "qazwsx",
+                "Test", "Testowski", "27439745284",
+                new Date(1994, Calendar.JUNE, 3)
         );
 
         customerController.saveCustomer(customer1);
