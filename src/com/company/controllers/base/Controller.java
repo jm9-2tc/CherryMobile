@@ -5,9 +5,10 @@ import com.company.data.DatabaseManager;
 public abstract class Controller<T> {
     protected final DatabaseManager database;
 
-    protected Controller(DatabaseManager database) {
+    public Controller(DatabaseManager database) {
         this.database = database;
     }
 
-    protected abstract int saveBase(T object);
+    public abstract T load(int id);
+    public abstract void save(T object);
 }

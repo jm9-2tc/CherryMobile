@@ -1,6 +1,6 @@
 package com.company.controllers;
 
-import com.company.controllers.base.Controller;
+import com.company.controllers.base.InheritanceController;
 import com.company.data.DatabaseManager;
 import com.company.model.contract.base.Contract;
 import com.company.model.contract.PrePaidContract;
@@ -8,12 +8,12 @@ import com.company.model.contract.PrePaidContract;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ContractController extends Controller<Contract> {
+public class ContractController extends InheritanceController<Contract> {
     protected ContractController(DatabaseManager database) {
         super(database);
     }
 
-    public void saveContract(PrePaidContract contract) {
+    public void save(PrePaidContract contract) {
 
     }
 

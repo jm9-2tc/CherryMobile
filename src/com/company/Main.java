@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         DatabaseManager db = new DatabaseManager();
-        CustomerController customerController = new CustomerController(db);
+        CustomerController customerController = new CustomerController(db, addressController);
 
         IndividualCustomer customer1 = new IndividualCustomer(
                 "+48 622 765 816",
