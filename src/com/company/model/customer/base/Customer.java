@@ -7,13 +7,11 @@ public class Customer {
     private String phoneNumber;
     private String email;
     private String password;
-    private Address address;
 
-    public Customer(String email, String phoneNumber, String password, Address address) {
+    public Customer(String email, String phoneNumber, String password) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.address = address;
     }
 
     public Integer getId() {
@@ -46,13 +44,5 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

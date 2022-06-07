@@ -34,6 +34,13 @@ public class AddressController extends Controller<Address> {
 
     @Override
     public void save(Address object) {
-
+        database.execute("INSERT INTO customer VALUES (NULL, '"
+                + object.getPrefix() + "', '"
+                + object.getStreetName() + "', '"
+                + object.getBuildingNumber() + "', '"
+                + object.getApartmentNumber() + "', '"
+                + object.getZipCode() + "', '"
+                + object.getCityName() + "')"
+        );
     }
 }

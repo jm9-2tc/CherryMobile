@@ -2,9 +2,11 @@ package com.company.controllers.base;
 
 import com.company.data.DatabaseManager;
 
-public abstract class InheritanceController<T> extends Controller {
+public abstract class InheritanceController<T> {
+    protected final DatabaseManager database;
+
     public InheritanceController(DatabaseManager database) {
-        super(database);
+        this.database = database;
     }
 
     protected abstract int saveBase(T object);
