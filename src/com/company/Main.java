@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.controllers.AddressController;
+import com.company.controllers.ContractController;
 import com.company.controllers.CustomerController;
 import com.company.data.DatabaseManager;
 import com.company.model.customer.Address;
@@ -15,7 +16,8 @@ public class Main {
     public static void main(String[] args) {
         DatabaseManager db = new DatabaseManager();
         AddressController addressController = new AddressController(db);
-        CustomerController customerController = new CustomerController(db, addressController);
+        ContractController contractController = new ContractController(db);
+        CustomerController customerController = new CustomerController(db, addressController, contractController);
 
         Address address = new Address(
                 "ul",
@@ -26,17 +28,20 @@ public class Main {
                 "Testowice"
         );
 
+        addressController.save(address);
+
         IndividualCustomer customer1 = new IndividualCustomer(
                 "+48 622 765 816",
                 "email@abc.com",
                 "qazwsx",
                 "Test", "Testowski", "27439745284",
                 new Date(1994, Calendar.JUNE, 3),
-                address);
+                address
+        );
 
         Customer c2 = customerController.loadIndividual(12);
 
-        //customerController.saveCustomer(customer1);
+        customerController.saveIndividual(customer1);
 
         db.close();
     }

@@ -6,7 +6,6 @@ import com.company.model.customer.base.Customer;
 import java.util.List;
 
 public class BusinessCustomer extends Customer {
-    private List<Contract> contracts;
     private String nip;
     private String regon;
     private String name;
@@ -18,14 +17,6 @@ public class BusinessCustomer extends Customer {
         this.regon = regon;
         this.name = name;
         this.addressList = addressList;
-    }
-
-    public List<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(List<Contract> contracts) {
-        this.contracts = contracts;
     }
 
     public String getNip() {

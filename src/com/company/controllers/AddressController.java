@@ -34,7 +34,7 @@ public class AddressController extends Controller<Address> {
 
     @Override
     public void save(Address object) {
-        database.execute("INSERT INTO customer VALUES (NULL, '"
+        database.execute("INSERT INTO address VALUES (NULL, '"
                 + object.getPrefix() + "', '"
                 + object.getStreetName() + "', '"
                 + object.getBuildingNumber() + "', '"
@@ -42,5 +42,12 @@ public class AddressController extends Controller<Address> {
                 + object.getZipCode() + "', '"
                 + object.getCityName() + "')"
         );
+
+        ResultSet queryResult = database.executeQuery("SELECT MAX(id) AS id FROM address;");
+
+        try {
+            object.setId(queryResult.getInt(1));
+            queryResult.close();
+        } catch(SQLException ignored) {}
     }
 }

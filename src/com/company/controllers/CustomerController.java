@@ -15,26 +15,27 @@ import java.util.List;
 
 public class CustomerController extends InheritanceController<Customer> {
     private final AddressController addressController;
+    private final ContractController contractController;
 
-    public CustomerController(DatabaseManager database, AddressController addressController) {
+    public CustomerController(DatabaseManager database, AddressController addressController, ContractController contractController) {
         super(database);
         this.addressController = addressController;
+        this.contractController = contractController;
     }
 
 
     public void saveIndividual(IndividualCustomer customer) {
         Address address = customer.getAddress();
+        int customerId = saveBase(customer);
 
         if (address.getId() == null) {
             throw new ObjectNotSavedException("address");
         }
 
         database.execute("INSERT INTO customer_address VALUES ("
-                + customer.getId() + "', '"
-                + customer.getAddress().getId() + "')"
+                + customerId + ", '"
+                + customer.getAddress().getId() + "', '');"
         );
-
-        int customerId = saveBase(customer);
         database.execute("INSERT INTO individual_customer VALUES ('" + customerId + "', '" + customer.getFirstName() + "', '" + customer.getLastName() + "', '" + customer.getPesel() + "')");
     }
 
@@ -60,8 +61,7 @@ public class CustomerController extends InheritanceController<Customer> {
     protected int saveBase(Customer customer) {
         database.execute("INSERT INTO customer VALUES (NULL, '"
                 + customer.getEmail() + "', '"
-                + customer.getPhoneNumber()
-                + "', '"
+                + customer.getPhoneNumber() + "', '"
                 + customer.getPassword() + "')"
         );
 
@@ -80,22 +80,21 @@ public class CustomerController extends InheritanceController<Customer> {
         Customer base = loadBase(id);
         if (base != null) {
             IndividualCustomer customer = null;
+            ResultSet result = database.executeQuery("SELECT * FROM individual_customer WHERE customer_ptr_id = " + id + ";");
+            ResultSet address = database.executeQuery("SELECT id FROM customer_address WHERE customer_id = " + id + ";");
 
             try {
-                ResultSet result = database.executeQuery("SELECT * FROM individual_customer WHERE customer_ptr_id = " + id + ";");
-                ResultSet address = database.executeQuery("SELECT id FROM customer_address WHERE customer_id = " + id + ";");
-
                 customer = new IndividualCustomer(
                         base.getPhoneNumber(),
                         base.getEmail(),
                         base.getPassword(),
-                        result.getString(1),
                         result.getString(2),
                         result.getString(3),
-                        result.getDate(4),
-                        addressController.load(address.getInt(0))
+                        result.getString(4),
+                        result.getDate(5),
+                        addressController.load(address.getInt(1))
                 );
-                customer.setId(result.getInt(0));
+                customer.setId(result.getInt(1));
             } catch (SQLException ignored) {}
 
             return customer;
@@ -108,13 +107,12 @@ public class CustomerController extends InheritanceController<Customer> {
         Customer base = loadBase(id);
         if (base != null) {
             BusinessCustomer customer = null;
+            ResultSet result = database.executeQuery("SELECT * FROM business_customer WHERE customer_ptr_id = " + id + ";");
+            ResultSet customerAddresses = database.executeQuery("SELECT id FROM customer_address WHERE customer_id = " + id + ";");
+
+            List<Address> addressList = new ArrayList<>();
 
             try {
-                ResultSet result = database.executeQuery("SELECT * FROM business_customer WHERE customer_ptr_id = " + id + ";");
-                ResultSet customerAddresses = database.executeQuery("SELECT id FROM customer_address WHERE customer_id = " + id + ";");
-
-                List<Address> addressList = new ArrayList<>();
-
                 while (customerAddresses.next()) {
                     addressList.add(addressController.load(customerAddresses.getInt(0)));
                 }
@@ -123,12 +121,12 @@ public class CustomerController extends InheritanceController<Customer> {
                         base.getPhoneNumber(),
                         base.getEmail(),
                         base.getPassword(),
-                        result.getString(1),
                         result.getString(2),
                         result.getString(3),
+                        result.getString(4),
                         addressList
                 );
-                customer.setId(result.getInt(0));
+                customer.setId(result.getInt(1));
             } catch (SQLException ignored) {}
 
             return customer;
@@ -142,14 +140,12 @@ public class CustomerController extends InheritanceController<Customer> {
         ResultSet result = database.executeQuery("SELECT * FROM customer WHERE id = " + id + ";");
         Customer customer = null;
         try {
-            ResultSet customerAddressId = database.executeQuery("SELECT address_id FROM customer WHERE id = " + id + ";");
-
             customer = new Customer(
-                    result.getString(1),
                     result.getString(2),
-                    result.getString(3)
+                    result.getString(3),
+                    result.getString(4)
             );
-            customer.setId(result.getInt(0));
+            customer.setId(result.getInt(1));
         } catch (SQLException ignored) {}
         return customer;
     }

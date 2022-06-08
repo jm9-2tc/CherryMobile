@@ -6,12 +6,13 @@ import com.company.model.customer.base.Customer;
 import java.util.Date;
 
 public class IndividualCustomer extends Customer {
+    public static final int MAX_CONTRACTS = 10;
+
     private String firstName;
     private String lastName;
     private String pesel;
     private Date dateOfBirth;
     private Address address;
-    private Contract[] contracts = new Contract[10];
 
     public IndividualCustomer(String phoneNumber, String email, String password, String firstName, String lastName, String pesel, Date dateOfBirth, Address address) {
         super(phoneNumber, email, password);
@@ -60,13 +61,5 @@ public class IndividualCustomer extends Customer {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Contract[] getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(Contract[] contracts) {
-        this.contracts = contracts;
     }
 }

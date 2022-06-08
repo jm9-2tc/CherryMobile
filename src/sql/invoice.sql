@@ -1,0 +1,1 @@
+SELECT * FROM contract WHERE customer_id = 12;

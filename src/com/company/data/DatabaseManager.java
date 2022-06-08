@@ -20,8 +20,8 @@ public class DatabaseManager {
             if (!tables.next()) {
                 creator.create(connection.createStatement());
             }
-        } catch (SQLException | ClassNotFoundException ignored) {
-            ignored.printStackTrace();
+        } catch (SQLException | ClassNotFoundException exception) {
+            exception.printStackTrace();
             stopApplication("cannot connect to the database.");
         }
     }
@@ -41,10 +41,9 @@ public class DatabaseManager {
         try {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            //statement.close();
-        } catch (SQLException ignored) {
+        } catch (SQLException exception) {
             System.out.println("cannot execute SQL: '" + sql + "'.");
-            ignored.printStackTrace();
+            exception.printStackTrace();
             System.exit(64);
         }
         return resultSet;
@@ -54,9 +53,8 @@ public class DatabaseManager {
         try {
             Statement statement = connection.createStatement();
             statement.execute(sql);
-            //statement.close();
-        } catch (SQLException ignored) {
-            ignored.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             stopApplication("cannot execute SQL: '" + sql + "'.");
         }
     }
