@@ -2,14 +2,13 @@ package com.company.controllers;
 
 import com.company.controllers.base.InheritanceController;
 import com.company.data.DatabaseManager;
-import com.company.exception.ObjectNotSavedException;
-import com.company.exception.TooManyContractsException;
+import com.company.exceptions.ObjectNotSavedException;
+import com.company.exceptions.TooManyContractsException;
 import com.company.model.contract.PostPaidContract;
 import com.company.model.contract.PostPaidPrices;
 import com.company.model.contract.PrePaidPrices;
 import com.company.model.contract.base.Contract;
 import com.company.model.contract.PrePaidContract;
-import com.company.model.customer.BusinessCustomer;
 import com.company.model.customer.IndividualCustomer;
 import com.company.model.customer.base.Customer;
 
@@ -29,7 +28,7 @@ public class ContractController extends InheritanceController<Contract> {
 
         try {
             while (result.next()) {
-                contracts.add(loadBase(result.getInt(0)));
+                contracts.add(load(result.getInt(1)));
             }
         } catch (SQLException ignored) {}
         return contracts;
@@ -89,11 +88,12 @@ public class ContractController extends InheritanceController<Contract> {
     }
 
     private void savePostPaidPrices(int id, PostPaidPrices prices) {
-        database.execute("INSERT INTO pre_paid_prices VALUES ("
+        database.execute("INSERT INTO post_paid_prices VALUES ("
                 + id + ", "
                 + prices.getContractPrice() + ", "
                 + prices.getSmsCountInPrice() + ", "
                 + prices.getPhoneMinutesCountInPrice() + ", "
+                + prices.getInternetMegabytesCountInPrice() + ", "
                 + prices.getSmsAboveContractPrice() + ", "
                 + prices.getPhoneMinuteAboveContractPrice() + ", "
                 + prices.getInternetMegabyteAboveContractPrice() + ")"
@@ -102,7 +102,7 @@ public class ContractController extends InheritanceController<Contract> {
 
     @Override
     protected int saveBase(Contract object) {
-        database.execute("INSERT INTO contract VALUES (NULL, '"
+        database.execute("INSERT INTO contract VALUES (NULL, NULL, '"
                 + object.getCreationDate() + "', '"
                 + object.getEndingDate() + "')"
         );
@@ -111,6 +111,7 @@ public class ContractController extends InheritanceController<Contract> {
         try {
             ResultSet queryResult = database.executeQuery("SELECT MAX(id) AS id FROM contract;");
             contractId = queryResult.getInt(1);
+            object.setId(contractId);
             queryResult.close();
         } catch (SQLException ignored) {}
         return contractId;
@@ -193,6 +194,20 @@ public class ContractController extends InheritanceController<Contract> {
                     result.getInt(7),
                     result.getInt(8)
             );
+        } catch (SQLException ignored) {}
+        return null;
+    }
+
+    public Contract load(int id) {
+        ResultSet prePaid = database.executeQuery("SELECT contract_ptr_id FROM pre_paid_contract WHERE contract_ptr_id = " + id + ";");
+        ResultSet postPaid = database.executeQuery("SELECT contract_ptr_id FROM post_paid_contract WHERE contract_ptr_id = " + id + ";");
+
+        try {
+            if (prePaid.next()) {
+                return loadPostPaid(id);
+            } else if (postPaid.next()) {
+                return loadPostPaid(id);
+            }
         } catch (SQLException ignored) {}
         return null;
     }

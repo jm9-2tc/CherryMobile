@@ -1,12 +1,13 @@
 package com.company.data;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseCreator {
-    private static final String sqlCreatorFilePath = "com\\company\\sql\\dbcreator.sql";
+    private static final String sqlCreatorFilePath = "src\\sql\\dbcreator.sql";
     private static final String createDatabaseSql;
 
     static {

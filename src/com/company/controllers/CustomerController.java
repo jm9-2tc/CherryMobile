@@ -2,7 +2,7 @@ package com.company.controllers;
 
 import com.company.controllers.base.InheritanceController;
 import com.company.data.DatabaseManager;
-import com.company.exception.ObjectNotSavedException;
+import com.company.exceptions.ObjectNotSavedException;
 import com.company.model.customer.Address;
 import com.company.model.customer.BusinessCustomer;
 import com.company.model.customer.base.Customer;
@@ -36,7 +36,13 @@ public class CustomerController extends InheritanceController<Customer> {
                 + customerId + ", '"
                 + customer.getAddress().getId() + "', '');"
         );
-        database.execute("INSERT INTO individual_customer VALUES ('" + customerId + "', '" + customer.getFirstName() + "', '" + customer.getLastName() + "', '" + customer.getPesel() + "')");
+        database.execute("INSERT INTO individual_customer VALUES ('"
+                + customerId + "', '"
+                + customer.getFirstName() + "', '"
+                + customer.getLastName() + "', '"
+                + customer.getPesel() + "', '"
+                + customer.getDateOfBirth() + "')"
+        );
     }
 
     public void saveBusiness(BusinessCustomer customer) {
@@ -133,6 +139,20 @@ public class CustomerController extends InheritanceController<Customer> {
         } else{
             return null;
         }
+    }
+
+    public Customer load(int id) {
+        ResultSet individual = database.executeQuery("SELECT customer_ptr_id FROM individual_customer WHERE customer_ptr_id = " + id + ";");
+        ResultSet business = database.executeQuery("SELECT customer_ptr_id FROM business_customer WHERE customer_ptr_id = " + id + ";");
+
+        try {
+            if (individual.next()) {
+                return loadIndividual(id);
+            } else if (business.next()) {
+                return loadBusiness(id);
+            }
+        } catch (SQLException ignored) {}
+        return null;
     }
 
     @Override

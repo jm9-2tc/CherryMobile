@@ -19,15 +19,15 @@ public class AddressController extends Controller<Address> {
         Address address = null;
         try {
             address = new Address(
-                    result.getString(1),
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
                     result.getString(5),
-                    result.getString(6)
+                    result.getString(6),
+                    result.getString(7)
             );
 
-            address.setId(result.getInt(0));
+            address.setId(result.getInt(1));
         } catch (SQLException ignored) {}
         return address;
     }

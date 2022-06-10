@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exceptions;
 
 public class TooManyContractsException extends RuntimeException {
     public TooManyContractsException() {
